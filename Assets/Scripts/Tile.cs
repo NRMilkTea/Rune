@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour
     public TileData data;
     [SerializeField] private Sprite _sprite;
 
-    public void Draw()
+    public void Load()
     {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = _sprite;
@@ -24,6 +24,6 @@ public class Tile : MonoBehaviour
 [Serializable]
 public class TileData
 {
-    public int x, y;
+    public Vector2Int coordinate;
     // public TileType(Enum)
 }

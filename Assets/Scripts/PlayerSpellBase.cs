@@ -36,9 +36,9 @@ public abstract class PlayerSpellBase : MonoBehaviour
 
             newTile.spell = this;
             newTile.data = tileData;
-            newTile.transform.localPosition = new Vector2(tileData.x, tileData.y);
+            newTile.transform.localPosition = (Vector2)newTile.data.coordinate;
 
-            newTile.Draw();
+            newTile.Load();
             tiles.Add(newTile);
         }
     }

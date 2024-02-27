@@ -8,7 +8,7 @@ public class TileSlot : MonoBehaviour
     public TileSlotData data;
     [SerializeField] private Sprite _sprite;
 
-    public void Draw()
+    public void Load()
     {
         GetComponent<SpriteRenderer>().sprite = _sprite;
     }
@@ -17,6 +17,6 @@ public class TileSlot : MonoBehaviour
 [Serializable]
 public class TileSlotData
 {
-    public int x, y;
+    public Vector2Int coordinate;
     // public TileType(Enum)
 }

@@ -44,13 +44,11 @@ public class SpellManager : MonoBehaviour
                 var newTileSlotObject = Instantiate(_tileSlotPrefab, _tileSlotHolder.transform);
                 var newTileSlot = newTileSlotObject.GetComponent<TileSlot>();
 
-                newTileSlot.data.x = i;
-                newTileSlot.data.y = j;
+                newTileSlot.data.coordinate = new Vector2Int(i, j);
 
-                newTileSlot.transform.localPosition = new Vector2(
-                    newTileSlot.data.x, newTileSlot.data.y );
+                newTileSlot.transform.localPosition = (Vector2)newTileSlot.data.coordinate;
 
-                newTileSlot.Draw();
+                newTileSlot.Load();
 
                 _tileSlotGrid[i, j] = newTileSlot;
             }
@@ -112,18 +110,14 @@ public class SpellManager : MonoBehaviour
 
     private bool CanPlaceSpellOnTileSlotGrid()
     {
-        Debug.Log("Attempt to place spell: ");
         foreach (Tile tile in _spellDragged.tiles)
         {
             // Fire a raycast to layer Spell and layer Tile slot
             RaycastHit2D hit = Physics2D.Raycast(tile.transform.position, Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Tile Slot", "Spell"));
 
             if (hit.collider == null) return false;
-            Debug.Log($"  I hit {hit.collider.gameObject}!");
             if (hit.collider.gameObject.GetComponent<TileSlot>() == null) return false; // NOT hits on tile slot
-            Debug.Log($"  I hit slot {hit.collider.gameObject.GetComponent<TileSlot>().data.x} {hit.collider.gameObject.GetComponent<TileSlot>().data.y}!");
         }
-        Debug.Log("    CAN PLACE!");
         return true;
     }
 
