@@ -11,7 +11,7 @@ public class Tile : MonoBehaviour
     // Tile information
     public PlayerSpellBase spell; // the spell to whom this tile is attached
     public TileData data;
-    public Sprite _sprite;
+    [SerializeField] private Sprite _sprite;
 
     public void Draw()
     {

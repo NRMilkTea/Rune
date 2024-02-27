@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 28917412}
   - component: {fileID: 28917411}
   m_Layer: 8
-  m_Name: spellExample (1)
+  m_Name: spell Example (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   displayName: 
   description: 
   tiles: []
+  pivotTile: {fileID: 0}
   color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!4 &28917412
 Transform:
@@ -171,37 +172,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 991847757}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &295294542
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 295294543}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &295294543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295294542}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1591084, y: -0.97364926, z: 0.03973891}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -368,7 +338,7 @@ GameObject:
   - component: {fileID: 632213216}
   - component: {fileID: 632213217}
   m_Layer: 0
-  m_Name: GridBackground
+  m_Name: Grid Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,8 +397,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -52393107
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.25, g: 0.25, b: 0.25, a: 1}
@@ -441,6 +411,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &944569111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 944569112}
+  m_Layer: 0
+  m_Name: Tile Slot Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &944569112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944569111}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: -4, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991847756
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 991847757}
   m_Layer: 0
-  m_Name: SpellHolder
+  m_Name: Spell Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +467,7 @@ Transform:
   m_GameObject: {fileID: 991847756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: -4, z: 0}
+  m_LocalPosition: {x: -8, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -485,7 +486,7 @@ GameObject:
   - component: {fileID: 1182319458}
   - component: {fileID: 1182319459}
   m_Layer: 0
-  m_Name: InvertoryBackground
+  m_Name: Invertory Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -544,8 +545,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -52393107
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.5, g: 0.38541666, b: 0.25, a: 1}
@@ -569,7 +570,7 @@ GameObject:
   - component: {fileID: 1259215936}
   - component: {fileID: 1259215937}
   m_Layer: 0
-  m_Name: SpellManager
+  m_Name: Spell Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -602,6 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84095d07f9775034b906235223cfbcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileSlotHolder: {fileID: 944569111}
+  _tileSlotPrefab: {fileID: 5573462670603515776, guid: 976a44dfc7dc522468527b9ff10cd7be, type: 3}
 --- !u!1 &1518588244
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +630,7 @@ Transform:
   m_GameObject: {fileID: 1518588244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1591084, y: -0.97364926, z: 0.03973891}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -644,7 +647,7 @@ GameObject:
   - component: {fileID: 1548549236}
   - component: {fileID: 1548549235}
   m_Layer: 8
-  m_Name: spellExample
+  m_Name: spell Example
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -666,6 +669,7 @@ MonoBehaviour:
   displayName: 
   description: 
   tiles: []
+  pivotTile: {fileID: 0}
   color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1548549236
 Transform:
@@ -758,7 +762,7 @@ GameObject:
   - component: {fileID: 1990430685}
   - component: {fileID: 1990430686}
   m_Layer: 0
-  m_Name: InfoBackground
+  m_Name: Info Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -817,8 +821,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -52393107
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
@@ -841,4 +845,4 @@ SceneRoots:
   - {fileID: 1890049478}
   - {fileID: 991847757}
   - {fileID: 1518588245}
-  - {fileID: 295294543}
+  - {fileID: 944569112}

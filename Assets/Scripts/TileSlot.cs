@@ -6,6 +6,12 @@ using UnityEngine;
 public class TileSlot : MonoBehaviour
 {
     public TileSlotData data;
+    [SerializeField] private Sprite _sprite;
+
+    public void Draw()
+    {
+        GetComponent<SpriteRenderer>().sprite = _sprite;
+    }
 }
 
 [Serializable]

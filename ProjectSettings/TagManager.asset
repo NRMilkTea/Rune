@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Tile Slot
   - Spell
-  - 
+  - Dragged Spell
   - 
   - 
   - 
@@ -38,9 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4242574189
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: SpellDragged
+  - name: Dragged Spell
     uniqueID: 1479004421
     locked: 0

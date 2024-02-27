@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,12 @@ public abstract class PlayerSpellBase : MonoBehaviour
     public string displayName;
     public string description;
     
-    // In case of runtime spell tile changes, this will only be used in initialization
     public abstract List<TileData> DefaultTileLayout { get; set; }
 
     [HideInInspector]
     public List<Tile> tiles;
+    [HideInInspector]
+    public Tile pivotTile;
     public Color color;
 
     private void Awake()
