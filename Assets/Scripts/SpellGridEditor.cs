@@ -4,18 +4,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpellManager : MonoBehaviour
+public class SpellGridEditor : MonoBehaviour
 {
     private Camera _camera;
     [SerializeField] private GameObject _tileSlotHolder;
     [SerializeField] private GameObject _tileSlotPrefab;
 
+    [SerializeField] private GameObject _inventorySlotPrefab;
+    [SerializeField] private GameObject _inventoryObject;
+
     // Define the size of the grid
     private const int
         _tileSlotGridXMax = 9,
         _tileSlotGridYMax = 9;
-
     private TileSlot[,] _tileSlotGrid;
+
+    private const int
+        _inventoryColumns = 6,
+        _inventoryRows = 2;
+    private const float _inventorySize = 1.5f;
 
     private bool _isDragging;
     private PlayerSpellBase _spellDragged;
@@ -51,6 +58,16 @@ public class SpellManager : MonoBehaviour
                 newTileSlot.Load();
 
                 _tileSlotGrid[i, j] = newTileSlot;
+            }
+        }
+        // Generate the inventory
+        for (int c = 0; c < _inventoryColumns; c++)
+        {
+            for (int r = 0; r < _inventoryRows; r++)
+            {
+                var newInventorySlot = Instantiate(_inventorySlotPrefab, _inventoryObject.transform);
+
+                newInventorySlot.transform.localPosition = new Vector2(r * _inventorySize, c * _inventorySize);
             }
         }
     }
