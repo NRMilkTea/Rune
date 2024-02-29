@@ -100,9 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spell: {fileID: 0}
   data:
-    x: 0
-    y: 0
-  _sprite: {fileID: 21300000, guid: 7ec90b56e67c64e47bec80f9e5227a5e, type: 3}
+    coordinate: {x: 0, y: 0}
+  tileType: 0
+  _fillUpTileSprite: {fileID: 21300000, guid: 2d4989ec861af6c48bb3487fa60ca52f, type: 3}
+  _directionalPassTileSprite: {fileID: 21300000, guid: 7ec90b56e67c64e47bec80f9e5227a5e, type: 3}
+  _unassignedTileSprite: {fileID: 21300000, guid: fb20f574234e9a34ea3dd3bbfe39505a, type: 3}
 --- !u!61 &-1390536405559622655
 BoxCollider2D:
   m_ObjectHideFlags: 0

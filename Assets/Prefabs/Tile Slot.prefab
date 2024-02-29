@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    x: 0
-    y: 0
-  _sprite: {fileID: 21300000, guid: 34aaeaee3e24f2c499e0d589803ae574, type: 3}
+    coordinate: {x: 0, y: 0}
+    type: 0
+  _slotSprite: {fileID: 21300000, guid: 34aaeaee3e24f2c499e0d589803ae574, type: 3}
+  _barrierSprite: {fileID: 21300000, guid: 9807501c95aa1264e950577ae51668c8, type: 3}
 --- !u!61 &-2712126748444411168
 BoxCollider2D:
   m_ObjectHideFlags: 0

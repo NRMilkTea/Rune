@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public abstract class PlayerSpellBase : MonoBehaviour
@@ -39,12 +40,20 @@ public abstract class PlayerSpellBase : MonoBehaviour
             var newTileObject = Instantiate(_tilePrefab, this.transform);
             var newTile = newTileObject.GetComponent<Tile>();
 
+            tiles.Add(newTile);
+
             newTile.spell = this;
             newTile.data = tileData;
             newTile.transform.localPosition = (Vector2)newTile.data.coordinate;
-
-            newTile.Reload();
-            tiles.Add(newTile);
+            newTile.GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("Spell");
+        }
+        Draw();
+    }
+    private void Draw()
+    {
+        foreach (var tile in tiles)
+        {
+            tile.Draw();
         }
     }
     private void CalculateSpellSize()

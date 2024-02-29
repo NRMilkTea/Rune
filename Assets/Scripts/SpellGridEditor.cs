@@ -56,11 +56,27 @@ public class SpellGridEditor : MonoBehaviour
 
                 newTileSlot.data.coordinate = new Vector2Int(i, j);
                 newTileSlot.transform.localPosition = (Vector2)newTileSlot.data.coordinate;
-                newTileSlot.Reload();
+                newTileSlot.data.type = TileSlotType.Barrier;
 
                 _tileSlotGrid[i, j] = newTileSlot;
             }
         }
+
+        // Set up a circular tile grid
+        // REMIND that this is only for test
+
+        for (int i = 0; i < _tileSlotGridXMax; i++)
+        {
+            for (int j = 0; j < _tileSlotGridYMax; j++)
+            {
+                if (((i - 4) * (i - 4) + (j - 4) * (j - 4)) <= 10)
+                {
+                    _tileSlotGrid[i, j].data.type = TileSlotType.Slot;
+                }
+            }
+        }
+
+        DrawGrid();
         // Generate the inventory
         for (int c = 0; c < _inventoryColumns; c++)
         {
@@ -176,6 +192,14 @@ public class SpellGridEditor : MonoBehaviour
         }
     }
 
+    private void DrawGrid()
+    {
+        foreach (var tileslot in _tileSlotGrid)
+        {
+            tileslot.Draw();
+        }
+    }
+
     private void PutIntoInventorySlot()
     {
         RaycastHit2D hit = Physics2D.Raycast(GetMousePosition(), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Inventory Slot"));
@@ -212,7 +236,8 @@ public class SpellGridEditor : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(tile.transform.position, Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Tile Slot", "Spell"));
 
             if (hit.collider == null) return false;
-            if (hit.collider.gameObject.GetComponent<TileSlot>() == null) return false; // NOT hits on tile slot
+            if (hit.collider.gameObject.GetComponent<Tile>() != null) return false; // Hit on a spell tile (blocked)
+            if (hit.collider.gameObject.GetComponent<TileSlot>().data.type == TileSlotType.Barrier) return false;
         }
         return true;
     }
@@ -226,7 +251,7 @@ public class SpellGridEditor : MonoBehaviour
     private void UndragSpell(PlayerSpellBase spell)
     {
         SetSpellTileLayer(_spellDragged, LayerMask.NameToLayer("Spell"));
-        SetSpellTileSortingLayer(_spellDragged, SortingLayer.NameToID("Default"));
+        SetSpellTileSortingLayer(_spellDragged, SortingLayer.NameToID("Spell"));
         SetSpellPositionZ(_spellDragged, 0);
     }
 
