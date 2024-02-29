@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour
     public TileData data;
     [SerializeField] private Sprite _sprite;
 
-    public void Load()
+    public void Reload()
     {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         renderer.sprite = _sprite;

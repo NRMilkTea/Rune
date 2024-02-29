@@ -22,9 +22,14 @@ public abstract class PlayerSpellBase : MonoBehaviour
     public Tile pivotTile;
     public Color color;
 
+    public Vector2Int size;
+    public Vector2Int lowerLeftPosition;
+    public Vector2 centerPosition;
+
     private void Awake()
     {
         Init();
+        CalculateSpellSize();
     }
     private void Init()
     {
@@ -38,8 +43,27 @@ public abstract class PlayerSpellBase : MonoBehaviour
             newTile.data = tileData;
             newTile.transform.localPosition = (Vector2)newTile.data.coordinate;
 
-            newTile.Load();
+            newTile.Reload();
             tiles.Add(newTile);
         }
+    }
+    private void CalculateSpellSize()
+    {
+        int xMin = tiles[0].data.coordinate.x,
+            xMax = tiles[0].data.coordinate.x,
+            yMin = tiles[0].data.coordinate.y, 
+            yMax = tiles[0].data.coordinate.y;
+
+        foreach (var tile in tiles)
+        {
+            xMin = Mathf.Min(xMin, tile.data.coordinate.x);
+            xMax = Mathf.Max(xMax, tile.data.coordinate.x);
+            yMin = Mathf.Min(yMin, tile.data.coordinate.y);
+            yMax = Mathf.Max(yMax, tile.data.coordinate.y);
+        }
+
+        this.size = new Vector2Int(xMax - xMin, yMax - yMin);
+        this.lowerLeftPosition = new Vector2Int(xMin, yMin);
+        this.centerPosition = new Vector2((xMax + xMin) * 0.5f, (yMax + yMin) * 0.5f);
     }
 }

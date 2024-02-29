@@ -8,7 +8,7 @@ public class TileSlot : MonoBehaviour
     public TileSlotData data;
     [SerializeField] private Sprite _sprite;
 
-    public void Load()
+    public void Reload()
     {
         GetComponent<SpriteRenderer>().sprite = _sprite;
     }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3741995758360651244}
   - component: {fileID: 6405409133381200118}
   - component: {fileID: 2809152825738049834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Invertory slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565b32ec3aeca6d4189eeacf265aa9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spell: {fileID: 0}
 --- !u!212 &6405409133381200118
 SpriteRenderer:
   m_ObjectHideFlags: 0
