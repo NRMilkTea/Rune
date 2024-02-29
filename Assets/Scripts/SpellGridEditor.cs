@@ -32,6 +32,10 @@ public class SpellGridEditor : MonoBehaviour
     private PlayerSpellBase _spellDragged;
     private Vector2 _spellDraggedOriginalPosition;
     private Vector2 _offsetMouseToSpell;
+    private InventorySlot _wasInInventorySlot;
+    private Vector2 _spellOriginalScale;
+    private readonly Vector2 _spellScale = new Vector2(1.0f, 1.0f);
+    private readonly Vector2 _inventorySlotScale = new Vector2(1.2f, 1.2f);
 
     private void Awake()
     {
@@ -107,6 +111,9 @@ public class SpellGridEditor : MonoBehaviour
                     _isDragging = true;
                     _spellDraggedOriginalPosition = (Vector2)_spellDragged.transform.position;
                     _offsetMouseToSpell = _spellDragged.centerPosition;
+                    _wasInInventorySlot = inventorySlot;
+                    _spellOriginalScale = _spellDragged.transform.localScale;
+                    _spellDragged.transform.localScale = _spellScale;
 
                     // Lift dragged spell up so it doesn't get obstructed
                     DragSpell(_spellDragged);
@@ -121,6 +128,9 @@ public class SpellGridEditor : MonoBehaviour
                 _isDragging = true;
                 _spellDraggedOriginalPosition = (Vector2)_spellDragged.transform.position;
                 _offsetMouseToSpell = mousePosition - _spellDraggedOriginalPosition;
+                _wasInInventorySlot = null;
+                _spellOriginalScale = _spellDragged.transform.localScale;
+                //_spellDragged.transform.localScale = _spellScale; // Not needed
 
                 // Lift dragged spell up so it doesn't get obstructed
                 DragSpell(_spellDragged);
@@ -143,6 +153,7 @@ public class SpellGridEditor : MonoBehaviour
                 if (CanPlaceSpellOnInventorySlot())
                 {
                     PutIntoInventorySlot();
+                    _spellDragged.transform.localScale = _inventorySlotScale / _spellDragged.size;
                 }
                 else if (CanPlaceSpellOnTileSlotGrid())
                 {
@@ -153,6 +164,8 @@ public class SpellGridEditor : MonoBehaviour
                 {
                     // Put the spell back to its original position
                     _spellDragged.transform.position = _spellDraggedOriginalPosition;
+                    if (_wasInInventorySlot != null) _wasInInventorySlot.spell = _spellDragged;
+                    _spellDragged.transform.localScale = _spellOriginalScale;
                 }
                 // Put the spell down
                 UndragSpell(_spellDragged);
@@ -169,7 +182,7 @@ public class SpellGridEditor : MonoBehaviour
         InventorySlot inventorySlot = hit.collider.gameObject.GetComponent<InventorySlot>();
 
         inventorySlot.spell = _spellDragged;
-        Vector2 offsetSpellToSlot = -_spellDragged.centerPosition;
+        Vector2 offsetSpellToSlot = -_spellDragged.centerPosition / _spellDragged.size * _inventorySlotScale;
         _spellDragged.transform.position = (Vector2)inventorySlot.transform.position + offsetSpellToSlot;
     }
     private bool CanPlaceSpellOnInventorySlot()

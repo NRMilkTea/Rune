@@ -22,7 +22,7 @@ public abstract class PlayerSpellBase : MonoBehaviour
     public Tile pivotTile;
     public Color color;
 
-    public Vector2Int size;
+    public float size;
     public Vector2Int lowerLeftPosition;
     public Vector2 centerPosition;
 
@@ -62,7 +62,7 @@ public abstract class PlayerSpellBase : MonoBehaviour
             yMax = Mathf.Max(yMax, tile.data.coordinate.y);
         }
 
-        this.size = new Vector2Int(xMax - xMin, yMax - yMin);
+        this.size = Mathf.Max(xMax - xMin + 1, yMax - yMin + 1);
         this.lowerLeftPosition = new Vector2Int(xMin, yMin);
         this.centerPosition = new Vector2((xMax + xMin) * 0.5f, (yMax + yMin) * 0.5f);
     }
