@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Spell
+    uniqueID: 2586818299
+    locked: 0
   - name: Dragged Spell
     uniqueID: 1479004421
     locked: 0
