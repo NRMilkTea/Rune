@@ -46,6 +46,8 @@ public class SpellGridEditor : MonoBehaviour
 
     private void Start()
     {
+        #region
+        /// This might be moved to a Game Manager class
         // Generate the grid
         for (int i = 0; i < _tileSlotGridXMax; i++)
         {
@@ -54,7 +56,7 @@ public class SpellGridEditor : MonoBehaviour
                 var newTileSlotObject = Instantiate(_tileSlotPrefab, _tileSlotHolder.transform);
                 var newTileSlot = newTileSlotObject.GetComponent<TileSlot>();
 
-                newTileSlot.data.coordinate = new Vector2Int(i, j);
+                newTileSlot.data.coordinate = new Vector2Int(i - 4, j - 4);
                 newTileSlot.transform.localPosition = (Vector2)newTileSlot.data.coordinate;
                 newTileSlot.data.type = TileSlotType.Barrier;
 
@@ -87,6 +89,7 @@ public class SpellGridEditor : MonoBehaviour
                 newInventorySlot.transform.localPosition = new Vector2(r * _inventorySize, c * _inventorySize);
             }
         }
+        #endregion
     }
 
     public enum ClickedOn

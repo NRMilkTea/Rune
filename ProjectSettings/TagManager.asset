@@ -50,3 +50,9 @@ TagManager:
   - name: Dragged Spell
     uniqueID: 1479004421
     locked: 0
+  - name: Snake Body
+    uniqueID: 1570863437
+    locked: 0
+  - name: Snake Head
+    uniqueID: 2586756623
+    locked: 0
