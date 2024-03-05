@@ -31,7 +31,7 @@ public class SnakeBodySegment : MonoBehaviour
 
     public void Draw()
     {
-        centerPiece.transform.rotation = GetRotationFromDirection(toDirection);
+        this.transform.rotation = GetRotationFromDirection(toDirection);
         
         if (isTail) centerPiece.GetComponent<SpriteRenderer>().sprite = _tailSegment;
         else
@@ -48,9 +48,6 @@ public class SnakeBodySegment : MonoBehaviour
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        connectionPiece.transform.rotation = GetRotationFromDirection(toDirection);
-        connectionPiece.transform.localPosition = 0.5f * GetVectorFromDirection(toDirection);
     }
 
     private int GetRotationIndexFromDirections(Direction fromDirection, Direction toDirection)
