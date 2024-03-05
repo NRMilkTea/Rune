@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class SnakeHead : MonoBehaviour
 {
-    public static GameObject _headObject;
+    public static GameObject _headPrefab;
 
     public Vector2Int coordinate;
     public Direction facing;
 
-    public static SnakeHead Create()
+    public static SnakeHead Create(GameObject parentObject)
     {
-        GameObject newSnakeHeadObject = Instantiate(_headObject);
+        GameObject newSnakeHeadObject = Instantiate(_headPrefab, parentObject.transform);
         SnakeHead newSnakeHead = newSnakeHeadObject.GetComponent<SnakeHead>();
         return newSnakeHead;
     }

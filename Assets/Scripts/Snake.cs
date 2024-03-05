@@ -15,14 +15,14 @@ public class Snake : MonoBehaviour
     public int _growingBuffer;
     public Vector2Int _startingPoint;
 
-    private float _playerMovingControlCooldownInterval = 1.0f;
+    private float _playerMovingControlCooldownInterval = 0.1f;
     private bool _canPlayerMovingControl = true;
 
     private void Awake()
     {
         // Link prefabs to static references
-        SnakeHead._headObject = _headObject;
-        SnakeBodySegment._bodySegmentObject = _bodySegmentObject;
+        SnakeHead._headPrefab = _headObject;
+        SnakeBodySegment._bodySegmentPrefab = _bodySegmentObject;
         //
         _mainCamera = Camera.main;
     }
@@ -31,7 +31,7 @@ public class Snake : MonoBehaviour
     {
         _startingPoint = Vector2Int.zero;
 
-        _head = SnakeHead.Create();
+        _head = SnakeHead.Create(this.gameObject);
         _body = new();
     }
 
@@ -40,7 +40,7 @@ public class Snake : MonoBehaviour
         // player control
         if (_canPlayerMovingControl)
         {
-            Direction direction = GetExactlyOneArrowKeyDown();
+            Direction direction = GetExactlyOneArrowKey();
             if (direction != Direction.None) // Only accept one arrow key control
             {
                 bool canMoveToDirection = CanMoveTo(direction);
@@ -68,7 +68,7 @@ public class Snake : MonoBehaviour
         _head.Draw();
 
         // Add the body segment in the original position of head
-        SnakeBodySegment newBodySegment = SnakeBodySegment.Create();
+        SnakeBodySegment newBodySegment = SnakeBodySegment.Create(this.gameObject);
         newBodySegment.transform.position = oldHeadPosition;
         newBodySegment.fromDirection = oldFacing;
         newBodySegment.toDirection = newFacing;
@@ -85,16 +85,12 @@ public class Snake : MonoBehaviour
         {
             // Remove old tail
             SnakeBodySegment oldTailSegment = _body.Dequeue();
-            SnakeBodySegment newTailSegment = _body.Peek();
-
             oldTailSegment.Remove();
-            newTailSegment.isTail = true;
         }
-        else
-        {
-            // WARNING: THIS IS NOT IMPLEMENTED CORRECTLY YET
-            _growingBuffer = 0;
-        }
+        SnakeBodySegment currentTailSegment = _body.Peek();
+        currentTailSegment.isTail = true;
+        currentTailSegment.Draw();
+
         StartCoroutine(PlayerMovingControlCooldown());
     }
 
@@ -114,7 +110,9 @@ public class Snake : MonoBehaviour
         bool canMoveTo = true;
         foreach (var hit in hits)
         {
-            if (hit.collider.gameObject.GetComponent<SnakeBodySegment>() != null) canMoveTo = false;
+            if (hit.collider.gameObject.GetComponent<SnakeBodySegment>() != null)
+                if (hit.collider.gameObject.GetComponent<SnakeBodySegment>().isTail ==  false)
+                    canMoveTo = false;
             if (hit.collider.gameObject.GetComponent<TileSlot>() != null)
                 if (hit.collider.gameObject.GetComponent<TileSlot>().data.type == TileSlotType.Barrier)
                     canMoveTo = false;
@@ -134,12 +132,12 @@ public class Snake : MonoBehaviour
         }
     }
 
-    private Direction GetExactlyOneArrowKeyDown()
+    private Direction GetExactlyOneArrowKey()
     {
-        bool getKeyUp = Input.GetKeyDown(KeyCode.UpArrow);
-        bool getKeyRight = Input.GetKeyDown(KeyCode.RightArrow);
-        bool getKeyDown = Input.GetKeyDown(KeyCode.DownArrow);
-        bool getKeyLeft = Input.GetKeyDown(KeyCode.LeftArrow);
+        bool getKeyUp = Input.GetKey(KeyCode.UpArrow);
+        bool getKeyRight = Input.GetKey(KeyCode.RightArrow);
+        bool getKeyDown = Input.GetKey(KeyCode.DownArrow);
+        bool getKeyLeft = Input.GetKey(KeyCode.LeftArrow);
 
         if (      getKeyUp && !getKeyRight && !getKeyDown && !getKeyLeft) return Direction.Up;
         else if (!getKeyUp &&  getKeyRight && !getKeyDown && !getKeyLeft) return Direction.Right;

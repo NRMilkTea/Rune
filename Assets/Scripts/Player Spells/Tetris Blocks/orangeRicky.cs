@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class orageRicky : PlayerSpellBase
+public class orangeRicky : PlayerSpellBase
 {
     public override List<TileData> DefaultTileLayout
     {

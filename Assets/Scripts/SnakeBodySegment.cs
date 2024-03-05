@@ -6,7 +6,12 @@ using UnityEngine.UIElements.Experimental;
 
 public class SnakeBodySegment : MonoBehaviour
 {
-    public static GameObject _bodySegmentObject;
+    public static GameObject _bodySegmentPrefab;
+
+    [SerializeField] private Sprite _bodySegmentStraight;
+    [SerializeField] private Sprite _bodySegmentLeftTurn;
+    [SerializeField] private Sprite _bodySegmentRightTurn;
+    [SerializeField] private Sprite _tailSegment;
 
     public GameObject centerPiece;
     public GameObject connectionPiece;
@@ -17,33 +22,71 @@ public class SnakeBodySegment : MonoBehaviour
     public Direction toDirection;
     public bool isTail;
 
-    public static SnakeBodySegment Create()
+    public static SnakeBodySegment Create(GameObject parentObject)
     {
-        GameObject newBodySegmentObject = Instantiate(_bodySegmentObject);
+        GameObject newBodySegmentObject = Instantiate(_bodySegmentPrefab, parentObject.transform);
         SnakeBodySegment newbodySegment = newBodySegmentObject.GetComponent<SnakeBodySegment>();
         return newbodySegment;
     }
 
     public void Draw()
     {
-        centerPiece.transform.rotation = GetDirectionToRotation(toDirection);
-        connectionPiece.transform.rotation = GetDirectionToRotation(toDirection);
-        connectionPiece.transform.localPosition = GetDirectionToConnectionPieceLocalPosition(toDirection);
+        centerPiece.transform.rotation = GetRotationFromDirection(toDirection);
+        
+        if (isTail) centerPiece.GetComponent<SpriteRenderer>().sprite = _tailSegment;
+        else
+        {
+            switch (GetRotationIndexFromDirections(fromDirection, toDirection))
+            {
+                case 0: // straight
+                    centerPiece.GetComponent<SpriteRenderer>().sprite = _bodySegmentStraight; break;
+                case 1: // left turn
+                    centerPiece.GetComponent<SpriteRenderer>().sprite = _bodySegmentLeftTurn; break;
+                case 3: // right turn
+                    centerPiece.GetComponent<SpriteRenderer>().sprite = _bodySegmentRightTurn; break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        connectionPiece.transform.rotation = GetRotationFromDirection(toDirection);
+        connectionPiece.transform.localPosition = 0.5f * GetVectorFromDirection(toDirection);
     }
 
-    private Vector3 GetDirectionToConnectionPieceLocalPosition(Direction toDirection)
+    private int GetRotationIndexFromDirections(Direction fromDirection, Direction toDirection)
     {
-        switch (toDirection)
+        int fromDirectionIndex = GetDirectionIndexFromDirection(fromDirection);
+        int toDirectionIndex   = GetDirectionIndexFromDirection(toDirection);
+
+        int rotationIndex = (toDirectionIndex - fromDirectionIndex + 4) % 4;
+        return rotationIndex;
+    }
+
+    private int GetDirectionIndexFromDirection(Direction direction)
+    {
+        switch (direction)
         {
-            case Direction.Right: return new Vector3(0.5f, 0, 0);
-            case Direction.Up: return new Vector3(0, 0.5f, 0);
-            case Direction.Left: return new Vector3(-0.5f, 0, 0);
-            case Direction.Down: return new Vector3(0, -0.5f, 0);
-            default: throw new ArgumentOutOfRangeException(nameof(toDirection));
+            case Direction.Right: return 0;
+            case Direction.Up: return 1;
+            case Direction.Left: return 2;
+            case Direction.Down: return 3;
+            default: throw new ArgumentOutOfRangeException(nameof(direction));
         }
     }
 
-    private Quaternion GetDirectionToRotation(Direction facing)
+    private Vector3 GetVectorFromDirection(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up: return Vector2.up;
+            case Direction.Down: return Vector2.down;
+            case Direction.Left: return Vector2.left;
+            case Direction.Right: return Vector2.right;
+            default: throw new ArgumentOutOfRangeException(nameof(direction));
+        }
+    }
+    
+    private Quaternion GetRotationFromDirection(Direction facing)
     {
         switch (facing)
         {

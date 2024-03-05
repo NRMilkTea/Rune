@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 208032927403441347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1570863437
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd72271d4fb66bc42baf92ecd6c3a52d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96f5568266908334ca948496b3adacc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,6 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406eda6276c06ad428db184df3c7da2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bodySegmentStraight: {fileID: 21300000, guid: 96f5568266908334ca948496b3adacc8, type: 3}
+  _bodySegmentLeftTurn: {fileID: 21300000, guid: a29b2c8799eed2f4fb15b295464c9f3a, type: 3}
+  _bodySegmentRightTurn: {fileID: 21300000, guid: 8eff1e6ab737a484b90266d693b5a297, type: 3}
+  _tailSegment: {fileID: 21300000, guid: 5367ddfe43c6a7a44b93543bc9e76e1b, type: 3}
   centerPiece: {fileID: 2674478661955875366}
   connectionPiece: {fileID: 208032927403441347}
   coordinate: {x: 0, y: 0}
@@ -255,7 +259,7 @@ SpriteRenderer:
   m_SortingLayerID: 1570863437
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd72271d4fb66bc42baf92ecd6c3a52d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96f5568266908334ca948496b3adacc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
