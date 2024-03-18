@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class blueRicky : PlayerSpellBase
+namespace Mockup
 {
-    public override List<TileData> DefaultTileLayout
+    public class smashboy : PlayerSpellBase
     {
-        get => new List<TileData>
+        public override List<TileData> DefaultTileLayout
+        {
+            get => new List<TileData>
         {
             new TileData{coordinate = new Vector2Int(0, 0)},
             new TileData{coordinate = new Vector2Int(1, 0)},
-            new TileData{coordinate = new Vector2Int(2, 0)},
             new TileData{coordinate = new Vector2Int(0, 1)},
+            new TileData{coordinate = new Vector2Int(1, 1)},
         };
-        set { }
+            set { }
+        }
     }
 }
